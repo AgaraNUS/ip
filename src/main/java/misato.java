@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class misato {
 
-    // Global state (static variables so all functions can access them)
+    // Global state
     private static Task[] tasks = new Task[100];
     private static int taskCount = 0;
 
@@ -12,7 +12,6 @@ public class misato {
         Scanner scanner = new Scanner(System.in);
         String userInput;
 
-        // Main command loop
         while (true) {
             userInput = scanner.nextLine();
 
@@ -31,7 +30,6 @@ public class misato {
     // LOGIC HANDLERS
     // ---------------------------------------------------------
 
-    // Decides which method to call based on the user's input
     private static void handleCommand(String userInput) {
         if (userInput.equalsIgnoreCase("list")) {
             listTasks();
@@ -42,8 +40,23 @@ public class misato {
         else if (userInput.startsWith("unmark")) {
             unmarkTask(userInput);
         }
+        // New Command: "todo"
+        else if (userInput.startsWith("todo")) {
+            addTodo(userInput);
+        }
+        // New Command: "deadline"
+        else if (userInput.startsWith("deadline")) {
+            addDeadline(userInput);
+        }
+        // New Command: "event"
+        else if (userInput.startsWith("event")) {
+            addEvent(userInput);
+        }
         else {
-            addTask(userInput);
+            // For now, if command is unknown, we can just print an error or ignore
+            printLine();
+            System.out.println("Unknown command!");
+            printLine();
         }
     }
 
@@ -51,7 +64,8 @@ public class misato {
         printLine();
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < taskCount; i++) {
-            System.out.println((i + 1) + ".[" + tasks[i].getStatusIcon() + "] " + tasks[i].description);
+            // The .toString() method handles the formatting specific to each class
+            System.out.println((i + 1) + "." + tasks[i].toString());
         }
         printLine();
     }
@@ -62,7 +76,7 @@ public class misato {
 
         printLine();
         System.out.println("Nice! I've marked this task as done:");
-        System.out.println("  [" + tasks[index].getStatusIcon() + "] " + tasks[index].description);
+        System.out.println("  " + tasks[index].toString());
         printLine();
     }
 
@@ -72,16 +86,53 @@ public class misato {
 
         printLine();
         System.out.println("OK, I've marked this task as not done yet:");
-        System.out.println("  [" + tasks[index].getStatusIcon() + "] " + tasks[index].description);
+        System.out.println("  " + tasks[index].toString());
         printLine();
     }
 
-    private static void addTask(String description) {
-        tasks[taskCount] = new Task(description);
+    // ---------------------------------------------------------
+    // ADD TASK HANDLERS
+    // ---------------------------------------------------------
+
+    private static void addTodo(String command) {
+        // Format: "todo description"
+        String description = command.substring(5).trim(); // Remove "todo "
+        Task newTask = new Todo(description);
+        addTask(newTask);
+    }
+
+    private static void addDeadline(String command) {
+        // Format: "deadline description /by date"
+        int byIndex = command.indexOf("/by");
+        String description = command.substring(9, byIndex).trim(); // Remove "deadline "
+        String by = command.substring(byIndex + 4).trim(); // Remove "/by "
+
+        Task newTask = new Deadline(description, by);
+        addTask(newTask);
+    }
+
+    private static void addEvent(String command) {
+        // Format: "event description /from start /to end"
+        int fromIndex = command.indexOf("/from");
+        int toIndex = command.indexOf("/to");
+
+        String description = command.substring(6, fromIndex).trim(); // Remove "event "
+        String from = command.substring(fromIndex + 6, toIndex).trim(); // Remove "/from "
+        String to = command.substring(toIndex + 4).trim(); // Remove "/to "
+
+        Task newTask = new Event(description, from, to);
+        addTask(newTask);
+    }
+
+    // Unified method to print the "Got it" message and update count
+    private static void addTask(Task task) {
+        tasks[taskCount] = task;
         taskCount++;
 
         printLine();
-        System.out.println("added: " + description);
+        System.out.println("Got it. I've added this task:");
+        System.out.println("  " + task.toString());
+        System.out.println("Now you have " + taskCount + " tasks in the list.");
         printLine();
     }
 
@@ -89,7 +140,6 @@ public class misato {
     // HELPER METHODS
     // ---------------------------------------------------------
 
-    // Extracts the number from commands like "mark 2" and converts to array index (0-based)
     private static int getIndexFromCommand(String command) {
         String[] parts = command.split(" ");
         return Integer.parseInt(parts[1]) - 1;
@@ -114,8 +164,10 @@ public class misato {
 }
 
 // ---------------------------------------------------------
-// CLASS DEFINITIONS
+// CLASS DEFINITIONS (INHERITANCE)
 // ---------------------------------------------------------
+
+// Base Class
 class Task {
     protected String description;
     protected boolean isDone;
@@ -126,7 +178,7 @@ class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "X" : " ");
+        return (isDone ? "X" : " "); // mark done task with X
     }
 
     public void markAsDone() {
@@ -136,85 +188,53 @@ class Task {
     public void markAsUndone() {
         this.isDone = false;
     }
-}
 
-
-/*public class misato {
-
-    public static void main(String[] args) {
-        //String END_LINE = "____________________________________________________________";
-        String name = "Misato Katsuragi";
-        printLine();
-        System.out.println("Hello! I'm " + name + "\nWhat can I do for you?");
-        printLine();
-
-        //Initialise scanner for user input
-        Scanner scanner = new Scanner(System.in);
-        String userInput = "";
-
-        //Intialise array to store tasks
-        String[] tasks = new String[100];
-        int taskCount = 0;
-
-        //Add, List loop
-        while(true) {
-            userInput = scanner.nextLine();
-
-            //exit the loop
-            if (userInput.equalsIgnoreCase("bye bye") ) {
-                break;
-            }
-
-            //handle "list"command
-            if (userInput.equalsIgnoreCase("list")) {
-                printLine();
-                for (int i = 0; i < taskCount; i++) {
-                    //Display task list
-                    System.out.println("Here are the tasks in your list: ");
-                    System.out.println((i + 1) + ". " + tasks[i]);
-                }
-                printLine();
-            }
-            else {
-                tasks[taskCount] = userInput;
-                taskCount++;
-
-                printLine();
-                System.out.println("added: " + userInput);
-                printLine();
-            }
-        }
-
-        //Echo loop
-        while (true) {
-            userInput = scanner.nextLine();  //user will type something
-
-            if (userInput.equalsIgnoreCase("bye bye")){
-
-                break;  //exit loop when user types "bye bye"
-            }
-            //echo the command back
-            echoCommand(userInput);
-        }
-
-        printLine();
-        System.out.println("Bye! See you again!");
-        printLine();
-
-        scanner.close();
-    }
-
-    public static void echoCommand(String command) {
-        printLine();
-        System.out.println(command);
-        printLine();
-    }
-
-    public static void printLine() {
-        String END_LINE = "____________________________________________________________";
-        System.out.println(END_LINE);
+    // Base toString method
+    public String toString() {
+        return "[" + getStatusIcon() + "] " + description;
     }
 }
-*/
 
+// Subclass: Todo
+class Todo extends Task {
+    public Todo(String description) {
+        super(description);
+    }
 
+    @Override
+    public String toString() {
+        return "[T]" + super.toString();
+    }
+}
+
+// Subclass: Deadline
+class Deadline extends Task {
+    protected String by;
+
+    public Deadline(String description, String by) {
+        super(description);
+        this.by = by;
+    }
+
+    @Override
+    public String toString() {
+        return "[D]" + super.toString() + " (by: " + by + ")";
+    }
+}
+
+// Subclass: Event
+class Event extends Task {
+    protected String from;
+    protected String to;
+
+    public Event(String description, String from, String to) {
+        super(description);
+        this.from = from;
+        this.to = to;
+    }
+
+    @Override
+    public String toString() {
+        return "[E]" + super.toString() + " (from: " + from + " to: " + to + ")";
+    }
+}
