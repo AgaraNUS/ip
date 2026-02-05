@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class misato {
+public class Misato {
 
     // Global state
     private static Task[] tasks = new Task[100];
