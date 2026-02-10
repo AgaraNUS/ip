@@ -1,10 +1,12 @@
 import java.util.Scanner;
+//import java.util.ArrayList;
 
 public class Misato {
 
     // Global state
-    private static Task[] tasks = new Task[100];
-    private static int taskCount = 0;
+   /*protected static ArrayList<Task> tasks = new ArrayList<>();*/
+    protected static Task[] tasks = new Task[100];
+    protected static int taskCount = 0;
 
     public static void main(String[] args) {
         printGreeting();
