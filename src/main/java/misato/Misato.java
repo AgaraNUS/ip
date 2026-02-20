@@ -6,14 +6,16 @@ import misato.tasks.Event;
 import misato.tasks.Task;
 import misato.tasks.Todo;
 
-import java.util.ArrayList; // Import ArrayList
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Misato {
 
-    // ---------------------------------------------------------
     // CONSTANTS
-    // ---------------------------------------------------------
     private static final String LINE = "____________________________________________________________";
     private static final String COMMAND_BYE = "bye";
     private static final String COMMAND_BYE_ALT = "bye bye";
@@ -25,11 +27,16 @@ public class Misato {
     private static final String COMMAND_EVENT = "event";
     private static final String COMMAND_DELETE = "delete";
 
-    // GLOBAL STATE (Using ArrayList now)
+    // NEW: OS-independent file path ./data/misato.txt
+    private static final String FILE_PATH = Paths.get(".", "data", "misato.txt").toString();
 
+    // GLOBAL STATE
     private static final ArrayList<Task> tasks = new ArrayList<>();
 
     public static void main(String[] args) {
+        // NEW: Load existing tasks before starting
+        loadTasks();
+
         printGreeting();
 
         Scanner scanner = new Scanner(System.in);
@@ -52,6 +59,78 @@ public class Misato {
 
         printExit();
         scanner.close();
+    }
+
+    // ---------------------------------------------------------
+    // FILE I/O HANDLERS (Level 7)
+    // ---------------------------------------------------------
+
+    private static void loadTasks() {
+        File file = new File(FILE_PATH);
+        if (!file.exists()) {
+            return; // File doesn't exist yet, start with an empty list
+        }
+
+        try (Scanner fileScanner = new Scanner(file)) {
+            while (fileScanner.hasNext()) {
+                String line = fileScanner.nextLine();
+                try {
+                    Task task = parseLineToTask(line);
+                    tasks.add(task);
+                } catch (Exception e) {
+                    // STRETCH GOAL: Ignore corrupted data lines silently (or print a warning)
+                    System.out.println("Skipping corrupted data line: " + line);
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Error reading the data file.");
+        }
+    }
+
+    private static void saveTasks() {
+        File file = new File(FILE_PATH);
+        File parentDir = file.getParentFile();
+
+        // Handle case where directory doesn't exist
+        if (parentDir != null && !parentDir.exists()) {
+            parentDir.mkdirs();
+        }
+
+        try (FileWriter fw = new FileWriter(file)) {
+            for (Task task : tasks) {
+                fw.write(task.toFileFormat() + System.lineSeparator());
+            }
+        } catch (IOException e) {
+            printError("I couldn't save your tasks to the hard disk!");
+        }
+    }
+
+    private static Task parseLineToTask(String line) throws Exception {
+        // Regex escaping required for pipe symbol
+        String[] parts = line.split(" \\| ");
+        String type = parts[0];
+        boolean isDone = parts[1].equals("1");
+        String description = parts[2];
+
+        Task task;
+        switch (type) {
+            case "T":
+                task = new Todo(description);
+                break;
+            case "D":
+                task = new Deadline(description, parts[3]);
+                break;
+            case "E":
+                task = new Event(description, parts[3], parts[4]);
+                break;
+            default:
+                throw new Exception("Unknown task type");
+        }
+
+        if (isDone) {
+            task.markAsDone();
+        }
+        return task;
     }
 
     // ---------------------------------------------------------
@@ -82,9 +161,7 @@ public class Misato {
         printLine();
         System.out.println("Here are the tasks in your list:");
 
-        // Use tasks.size() instead of taskCount
         for (int i = 0; i < tasks.size(); i++) {
-            // Use .get(i) instead of [i]
             System.out.println((i + 1) + "." + tasks.get(i).toString());
         }
 
@@ -103,12 +180,11 @@ public class Misato {
 
             int index = Integer.parseInt(parts[1]) - 1;
 
-            // Check against .size()
             if (index < 0 || index >= tasks.size()) {
                 throw new MisatoException("Task number out of range.");
             }
 
-            Task task = tasks.get(index); // Retrieve task using .get()
+            Task task = tasks.get(index);
 
             if (isDone) {
                 task.markAsDone();
@@ -121,6 +197,9 @@ public class Misato {
             }
             System.out.println("  " + task.toString());
             printLine();
+
+            // NEW: Save after marking
+            saveTasks();
 
         } catch (NumberFormatException e) {
             throw new MisatoException("Tsk, at least provide a valid task number.");
@@ -140,7 +219,6 @@ public class Misato {
                 throw new MisatoException("Task number out of range.");
             }
 
-            // ArrayList handles the shifting automatically!
             Task removedTask = tasks.remove(index);
 
             printLine();
@@ -148,6 +226,9 @@ public class Misato {
             System.out.println("  " + removedTask.toString());
             System.out.println("Now you have " + tasks.size() + " tasks in the list.");
             printLine();
+
+            // NEW: Save after deleting
+            saveTasks();
 
         } catch (NumberFormatException e) {
             throw new MisatoException("Enter a number, not gibberish.");
@@ -218,13 +299,16 @@ public class Misato {
     }
 
     private static void addTaskToList(Task task) {
-        tasks.add(task); // Add to ArrayList
+        tasks.add(task);
 
         printLine();
         System.out.println("Got it. I've added this task:");
         System.out.println("  " + task.toString());
         System.out.println("Now you have " + tasks.size() + " tasks in the list.");
         printLine();
+
+        // NEW: Save after adding
+        saveTasks();
     }
 
     // ---------------------------------------------------------
@@ -245,11 +329,12 @@ public class Misato {
 
     private static void printExit() {
         printLine();
-        System.out.println("Bye bye!\n" +
-        "Find for yourself why you came here. And...\n" +
-                "when you're finished... come back.\n" +
-                "Promise me.\n" +
-                "Have a good time.");
+        System.out.println("""
+                Bye bye!
+                Find for yourself why you came here. And...
+                when you're finished... come back.
+                Promise me.
+                Have a good time.""");
         printLine();
     }
 
