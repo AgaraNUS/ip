@@ -152,7 +152,8 @@ public class Misato {
         } else if (userInput.startsWith(COMMAND_FIND)) { // NEW
             findTasks(userInput);
         } else {
-            throw new MisatoException("I'm sorry, but I don't know what that means. Are you stupid?");
+            throw new MisatoException("I'm sorry, but I don't know what that means. " +
+                    "");
         }
     }
 
@@ -192,14 +193,14 @@ public class Misato {
             } else {
                 task.markAsUndone();
                 printLine();
-                System.out.println("Tsk, just get on with is already");
+                System.out.println("Tsk, just get on with it already");
             }
             System.out.println("  " + task.toString());
             printLine();
             saveTasks();
 
         } catch (NumberFormatException e) {
-            throw new MisatoException("Tsk, at least provide a valid task number.");
+            throw new MisatoException("Please provide a valid task number.");
         }
     }
 
@@ -213,7 +214,7 @@ public class Misato {
             int index = Integer.parseInt(parts[1]) - 1;
 
             if (index < 0 || index >= tasks.size()) {
-                throw new MisatoException("Task number out of range.");
+                throw new MisatoException("Task number is out of range.");
             }
 
             Task removedTask = tasks.remove(index);
@@ -228,7 +229,7 @@ public class Misato {
             saveTasks();
 
         } catch (NumberFormatException e) {
-            throw new MisatoException("Enter a number, not gibberish.");
+            throw new MisatoException("Enter a valid number, onegai.");
         }
     }
 
@@ -236,7 +237,7 @@ public class Misato {
 
     private static void addTodo(String command) throws MisatoException {
         if (command.length() <= COMMAND_TODO.length()) {
-            throw new MisatoException("The description of a todo cannot be empty.\n");
+            throw new MisatoException("The todo command needs to be typed properly.\n");
         }
 
         String description = command.substring(COMMAND_TODO.length()).trim();
