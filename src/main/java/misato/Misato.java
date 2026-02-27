@@ -26,6 +26,7 @@ public class Misato {
     private static final String COMMAND_DEADLINE = "deadline";
     private static final String COMMAND_EVENT = "event";
     private static final String COMMAND_DELETE = "delete";
+    private static final String COMMAND_FIND = "find";
 
     // NEW: OS-independent file path ./data/misato.txt
     private static final String FILE_PATH = Paths.get(".", "data", "misato.txt").toString();
@@ -61,9 +62,7 @@ public class Misato {
         scanner.close();
     }
 
-    // ---------------------------------------------------------
     // FILE I/O HANDLERS (Level 7)
-    // ---------------------------------------------------------
 
     private static void loadTasks() {
         File file = new File(FILE_PATH);
@@ -133,9 +132,7 @@ public class Misato {
         return task;
     }
 
-    // ---------------------------------------------------------
     // LOGIC HANDLERS
-    // ---------------------------------------------------------
 
     private static void handleCommand(String userInput) throws MisatoException {
         if (userInput.equalsIgnoreCase(COMMAND_LIST)) {
@@ -152,6 +149,8 @@ public class Misato {
             addEvent(userInput);
         } else if (userInput.startsWith(COMMAND_DELETE)) {
             deleteTask(userInput);
+        } else if (userInput.startsWith(COMMAND_FIND)) { // NEW
+            findTasks(userInput);
         } else {
             throw new MisatoException("I'm sorry, but I don't know what that means. Are you stupid?");
         }
@@ -193,12 +192,10 @@ public class Misato {
             } else {
                 task.markAsUndone();
                 printLine();
-                System.out.println("OK, I've marked this task as not done yet:");
+                System.out.println("Tsk, just get on with is already");
             }
             System.out.println("  " + task.toString());
             printLine();
-
-            // NEW: Save after marking
             saveTasks();
 
         } catch (NumberFormatException e) {
@@ -235,9 +232,7 @@ public class Misato {
         }
     }
 
-    // ---------------------------------------------------------
     // ADD TASK HANDLERS
-    // ---------------------------------------------------------
 
     private static void addTodo(String command) throws MisatoException {
         if (command.length() <= COMMAND_TODO.length()) {
@@ -307,13 +302,35 @@ public class Misato {
         System.out.println("Now you have " + tasks.size() + " tasks in the list.");
         printLine();
 
-        // NEW: Save after adding
+
         saveTasks();
     }
 
-    // ---------------------------------------------------------
-    // HELPERS
-    // ---------------------------------------------------------
+    private static void findTasks(String command) throws MisatoException {
+        String keyword = command.substring(COMMAND_FIND.length()).trim();
+
+        if (keyword.isEmpty()) {
+            throw new MisatoException("What exactly am I supposed to find? Give me a keyword!");
+        }
+
+        printLine();
+        System.out.println("Here are the matching tasks in your list:");
+
+        int displayIndex = 1;
+        for (Task task : tasks) {
+            if (task.contains(keyword)) {
+                System.out.println(displayIndex + "." + task.toString());
+                displayIndex++;
+            }
+        }
+
+        if (displayIndex == 1) {
+            System.out.println("Baka. Do you even know what you're looking for?");
+        }
+        printLine();
+    }
+
+    // PRINT HELPERS
 
     private static void printError(String message) {
         printLine();

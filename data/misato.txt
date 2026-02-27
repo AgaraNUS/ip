@@ -1,2 +1,5 @@
-T | 1 | homework
-E | 0 | pasar malam | 20/2/2026 | 31/03/2026
+T | 0 | homework
+D | 0 | st2334 midterm practice | 4th March
+T | 0 | read a book
+D | 0 | return book | 2026-06-06 1800
+E | 0 | project meeting | 2026-08-06 1400 | 2026-08-06 1600

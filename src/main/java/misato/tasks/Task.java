@@ -25,6 +25,10 @@ public class Task {
         return (isDone ? "1" : "0") + " | " + description;
     }
 
+    public boolean contains(String word) {
+        return this.description.contains(word);
+    }
+
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;
