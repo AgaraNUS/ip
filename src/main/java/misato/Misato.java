@@ -27,12 +27,18 @@ public class Misato {
     private static final String COMMAND_EVENT = "event";
     private static final String COMMAND_DELETE = "delete";
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     private static final String COMMAND_FIND = "find";
 
     // NEW: OS-independent file path ./data/misato.txt
     private static final String FILE_PATH = Paths.get(".", "data", "misato.txt").toString();
 
     // GLOBAL STATE
+=======
+    private static final String COMMAND_SAVE = "save";
+
+    // Tasks list
+>>>>>>> Stashed changes
 =======
     private static final String COMMAND_SAVE = "save";
 
@@ -68,6 +74,7 @@ public class Misato {
         scanner.close();
     }
 
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
     // FILE I/O HANDLERS (Level 7)
 
@@ -144,6 +151,9 @@ public class Misato {
 =======
     // LOGIC HANDLERS
 >>>>>>> Stashed changes
+=======
+    // LOGIC HANDLERS
+>>>>>>> Stashed changes
     private static void handleCommand(String userInput) throws MisatoException {
         if (userInput.equalsIgnoreCase(COMMAND_LIST)) {
             listTasks();
@@ -163,7 +173,11 @@ public class Misato {
             findTasks(userInput);
         } else {
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
             throw new MisatoException("I'm sorry, but I don't know what that means. ");
+=======
+            throw new MisatoException("I'm sorry, but I don't know what that means.");
+>>>>>>> Stashed changes
 =======
             throw new MisatoException("I'm sorry, but I don't know what that means.");
 >>>>>>> Stashed changes
