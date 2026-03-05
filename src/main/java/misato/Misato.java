@@ -152,8 +152,7 @@ public class Misato {
         } else if (userInput.startsWith(COMMAND_FIND)) { // NEW
             findTasks(userInput);
         } else {
-            throw new MisatoException("I'm sorry, but I don't know what that means. " +
-                    "");
+            throw new MisatoException("I'm sorry, but I don't know what that means. ");
         }
     }
 
