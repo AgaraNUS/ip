@@ -6,7 +6,7 @@ Inspired by _Misato Katsuragi_, this chatbot helps you keep track of your daily 
 
 # Features
 
- ## Multiple Task Types:
+## Multiple Task Types:
 
 Support for basic tasks such as *To-Dos*, *Deadlines* _(with specific dates/times)_, and *Events* _(with start and end times)_.
 
@@ -40,7 +40,7 @@ ____________________________________________________________
 
 ## Marking tasks as done/undone
 
-## 
+
 
 ## Local Storage
 Automatically saves your task list to your local hard drive (`./data/misato.txt`) after every modification and loads it on startup.
