@@ -1,3 +1,6 @@
+# Misato Katsuragi chatbot
+
+## To see the full capabilities of the chatbot, please refer to the [User Guide](https://pages.github.com/)
 
 ### Pre-requisites
 Java Development Kit (JDK) 17 or higher installed on your machine.
@@ -24,3 +27,4 @@ Java Development Kit (JDK) 17 or higher installed on your machine.
    ```
    java -jar misato.jar 
 **Warning:** Keep the `src\main\java` folder as the root folder for Java files (i.e., don't rename those folders or move Java files to another folder outside of this folder path), as this is the default location some tools (e.g., Gradle) expect to find Java files.
+
