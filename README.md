@@ -27,7 +27,9 @@ Java Development Kit (JDK) 17 or higher installed on your machine.
 ### Running the Application
 1. Compile the Java files or run the provided `misato.jar` file.
 2. If running via the JAR file, open your terminal and execute:
-   ```java -jar misato.jar
+   ```
+   java -jar misato.jar
+   
 **Warning:** Keep the `src\main\java` folder as the root folder for Java files (i.e., don't rename those folders or move Java files to another folder outside of this folder path), as this is the default location some tools (e.g., Gradle) expect to find Java files.
 
 ## Features
