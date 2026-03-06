@@ -1,4 +1,4 @@
-package misato.exceptions;
+package main.java.misato.exceptions;
 
 /**
  * Custom exception class for handling chatbot-specific errors.

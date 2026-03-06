@@ -1,4 +1,4 @@
-package misato;
+package main.java.misato;
 
 import java.util.Scanner;
 

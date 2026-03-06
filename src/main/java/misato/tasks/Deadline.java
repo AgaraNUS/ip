@@ -1,47 +1,47 @@
-package misato.tasks;
+package main.java.misato.tasks;
 
-import misato.exceptions.MisatoException;
+import main.java.misato.exceptions.MisatoException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.time.format.ResolverStyle; // NEW IMPORT
+import java.time.format.ResolverStyle;
 
-public class Event extends Task {
-    protected LocalDateTime from;
-    protected LocalDateTime to;
+public class Deadline extends Task {
+    protected LocalDateTime by;
 
+    //Use 'uuuu' instead of 'yyyy' and chain .withResolverStyle(ResolverStyle.STRICT)
     private static final DateTimeFormatter INPUT_FORMAT = DateTimeFormatter
             .ofPattern("uuuu-MM-dd HHmm")
             .withResolverStyle(ResolverStyle.STRICT);
 
     private static final DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("dd MMM yyyy, h:mm a");
 
-    public Event(String description, String fromStr, String toStr) throws MisatoException {
+    public Deadline(String description, String byStr) throws MisatoException {
         super(description);
         try {
-            this.from = LocalDateTime.parse(fromStr.trim(), INPUT_FORMAT);
-            this.to = LocalDateTime.parse(toStr.trim(), INPUT_FORMAT);
+            this.by = LocalDateTime.parse(byStr.trim(), INPUT_FORMAT);
         } catch (DateTimeParseException e) {
+            //error message to clarify that the date might not exist
             throw new MisatoException("Your date format or value is invalid. Use: yyyy-MM-dd HHmm (e.g., 2026-12-31 1800). Ensure the date actually exists!");
         }
     }
 
     @Override
     public String toFileFormat() {
-        return "E | " + super.toFileFormat() + " | " + from.format(INPUT_FORMAT) + " | " + to.format(INPUT_FORMAT);
+        return "D | " + super.toFileFormat() + " | " + by.format(INPUT_FORMAT);
     }
 
     @Override
     public boolean equals(Object obj) {
         if (!super.equals(obj)) {
-            return false;
+            return false; // If the type or description doesn't match, it's not equal
         }
-        Event otherEvent = (Event) obj;
-        return this.from.equals(otherEvent.from) && this.to.equals(otherEvent.to);
+        Deadline otherDeadline = (Deadline) obj;
+        return this.by.equals(otherDeadline.by);
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + from.format(OUTPUT_FORMAT) + " to: " + to.format(OUTPUT_FORMAT) + ")";
+        return "[D]" + super.toString() + " (by: " + by.format(OUTPUT_FORMAT) + ")";
     }
 }

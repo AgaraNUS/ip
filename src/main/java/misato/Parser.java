@@ -1,16 +1,16 @@
-package misato;
+package main.java.misato;
 
-import misato.commands.AddCommand;
-import misato.commands.Command;
-import misato.commands.DeleteCommand;
-import misato.commands.ExitCommand;
-import misato.commands.FindCommand;
-import misato.commands.ListCommand;
-import misato.commands.MarkCommand;
-import misato.exceptions.MisatoException;
-import misato.tasks.Deadline;
-import misato.tasks.Event;
-import misato.tasks.Todo;
+import main.java.misato.commands.AddCommand;
+import main.java.misato.commands.Command;
+import main.java.misato.commands.DeleteCommand;
+import main.java.misato.commands.ExitCommand;
+import main.java.misato.commands.FindCommand;
+import main.java.misato.commands.ListCommand;
+import main.java.misato.commands.MarkCommand;
+import main.java.misato.exceptions.MisatoException;
+import main.java.misato.tasks.Deadline;
+import main.java.misato.tasks.Event;
+import main.java.misato.tasks.Todo;
 
 /**
  * Parses user input strings and translates them into executable Commands.

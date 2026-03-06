@@ -1,7 +1,7 @@
-package misato;
+package main.java.misato;
 
-import misato.commands.Command;
-import misato.exceptions.MisatoException;
+import main.java.misato.commands.Command;
+import main.java.misato.exceptions.MisatoException;
 import java.nio.file.Paths;
 
 /**

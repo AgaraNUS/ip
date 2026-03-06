@@ -1,9 +1,9 @@
-package misato.commands;
+package main.java.misato.commands;
 
-import misato.Storage;
-import misato.TaskList;
-import misato.Ui;
-import misato.exceptions.MisatoException;
+import main.java.misato.Storage;
+import main.java.misato.TaskList;
+import main.java.misato.Ui;
+import main.java.misato.exceptions.MisatoException;
 
 /**
  * Abstract base class representing an executable command.

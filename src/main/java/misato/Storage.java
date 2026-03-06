@@ -1,9 +1,9 @@
-package misato;
+package main.java.misato;
 
-import misato.tasks.Deadline;
-import misato.tasks.Event;
-import misato.tasks.Task;
-import misato.tasks.Todo;
+import main.java.misato.tasks.Deadline;
+import main.java.misato.tasks.Event;
+import main.java.misato.tasks.Task;
+import main.java.misato.tasks.Todo;
 
 import java.io.File;
 import java.io.FileWriter;

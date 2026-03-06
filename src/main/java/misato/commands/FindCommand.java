@@ -1,9 +1,9 @@
-package misato.commands;
+package main.java.misato.commands;
 
-import misato.Storage;
-import misato.TaskList;
-import misato.Ui;
-import misato.tasks.Task;
+import main.java.misato.Storage;
+import main.java.misato.TaskList;
+import main.java.misato.Ui;
+import main.java.misato.tasks.Task;
 
 public class FindCommand extends Command {
     private String keyword;

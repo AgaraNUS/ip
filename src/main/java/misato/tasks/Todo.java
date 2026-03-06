@@ -1,4 +1,4 @@
-package misato.tasks;
+package main.java.misato.tasks;
 
 public class Todo extends Task {
     public Todo(String description) {

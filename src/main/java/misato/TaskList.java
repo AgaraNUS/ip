@@ -1,6 +1,6 @@
-package misato;
+package main.java.misato;
 
-import misato.tasks.Task;
+import main.java.misato.tasks.Task;
 import java.util.ArrayList;
 
 /**
