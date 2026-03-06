@@ -1,6 +1,14 @@
 # Misato Katsuragi chatbot
+A lightweight, Command Line Interface (CLI) personal assistant and task manager, written in Java.
 
-## To see the full capabilities of the chatbot, please refer to the [User Guide](https://agaranus.github.io/Misato/)
+## Features
+- Add tasks
+- View tasks in a list
+- Mark/unmark tasks that you have done/undone respectively.
+- Delete specific tasks from the list
+- Find tasks in list using keywords
+
+### To see the full capabilities of the chatbot, please refer to the [User Guide](https://agaranus.github.io/Misato/)
 
 ### Pre-requisites
 Java Development Kit (JDK) 17 or higher installed on your machine.
