@@ -1,8 +1,3 @@
-# Misato Katsuragi project template
-
-Inspired by _Misato Katsuragi_, this chatbot helps you keep track of your daily tasks, deadlines, and events while storing your data locally.
-
-![misato about to destroy a can  of beer](/Misato_Image/eva_misato019.jpg)
 
 ### Pre-requisites
 Java Development Kit (JDK) 17 or higher installed on your machine.
@@ -29,17 +24,3 @@ Java Development Kit (JDK) 17 or higher installed on your machine.
    ```
    java -jar misato.jar 
 **Warning:** Keep the `src\main\java` folder as the root folder for Java files (i.e., don't rename those folders or move Java files to another folder outside of this folder path), as this is the default location some tools (e.g., Gradle) expect to find Java files.
-
-## Features
-
-**Multiple Task Types**: 
-   Support for basic tasks such as To-Dos, Deadlines (with specific dates/times), and Events (with start and end times).
-   Example input for To-Do: `todo read a book`
-   Example input for Deadline: `deadline return book /by 2026-06-06 1800`
-   Example input for Event: `event project meeting /from 2026-08-06 1400 /to 2026-08-06 1600`
-**Local Storage**: 
-   Automatically saves your task list to your local hard drive (`./data/misato.txt`) after every modification and loads it on startup.
-**Search Functionality**: 
-   Quickly find specific tasks using keywords.
-**Character UI**: 
-   Enjoy a touch of personality with custom success and error messages.
