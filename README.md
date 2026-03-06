@@ -2,7 +2,7 @@
 
 Inspired by _Misato Katsuragi_, this chatbot helps you keep track of your daily tasks, deadlines, and events while storing your data locally.
 
-![misato about to destroy a can  of beer](/ip/Misato_Image/eva_misato019.jpg)
+![misato about to destroy a can  of beer](/Misato_Image/eva_misato019.jpg)
 
 ### Pre-requisites
 Java Development Kit (JDK) 17 or higher installed on your machine.
