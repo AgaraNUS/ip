@@ -32,6 +32,15 @@ public class Deadline extends Task {
     }
 
     @Override
+    public boolean equals(Object obj) {
+        if (!super.equals(obj)) {
+            return false; // If the type or description doesn't match, it's not equal
+        }
+        Deadline otherDeadline = (Deadline) obj;
+        return this.by.equals(otherDeadline.by);
+    }
+
+    @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by.format(OUTPUT_FORMAT) + ")";
     }

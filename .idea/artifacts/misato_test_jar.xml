@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="misato_test:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/misato_test_jar</output-path>
+    <root id="archive" name="misato_test.jar">
+      <element id="module-output" name="misato_test" />
+    </root>
+  </artifact>
+</component>

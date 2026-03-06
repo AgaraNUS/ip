@@ -37,6 +37,10 @@ public class TaskList {
         return tasks.isEmpty();
     }
 
+    public boolean containsDuplicate(Task task) {
+        return tasks.contains(task);
+    }
+
     public ArrayList<Task> getTasks() {
         return tasks;
     }

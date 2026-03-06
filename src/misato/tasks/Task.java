@@ -51,6 +51,18 @@ public class Task {
     }
 
     @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || this.getClass() != obj.getClass()) {
+            return false;
+        }
+        Task otherTask = (Task) obj;
+        return this.description.equalsIgnoreCase(otherTask.description);
+    }
+
+    @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;
     }

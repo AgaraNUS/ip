@@ -16,6 +16,9 @@ public class AddCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws MisatoException {
+        if (tasks.containsDuplicate(task)) {
+            throw new MisatoException("Baka! You already have this exact same task in your list.");
+        }
         tasks.addTask(task);
         ui.showMessage("Got it. I've added this task:\n  " + task.toString() + "\nNow you have " + tasks.size() + " tasks in the list.");
         try {

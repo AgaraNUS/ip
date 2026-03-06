@@ -32,6 +32,15 @@ public class Event extends Task {
     }
 
     @Override
+    public boolean equals(Object obj) {
+        if (!super.equals(obj)) {
+            return false;
+        }
+        Event otherEvent = (Event) obj;
+        return this.from.equals(otherEvent.from) && this.to.equals(otherEvent.to);
+    }
+
+    @Override
     public String toString() {
         return "[E]" + super.toString() + " (from: " + from.format(OUTPUT_FORMAT) + " to: " + to.format(OUTPUT_FORMAT) + ")";
     }

@@ -3,47 +3,34 @@ Hello! I'm Misato Katsuragi
 What can I do for you?
 ____________________________________________________________
 ____________________________________________________________
-Here are the tasks in your list:
-____________________________________________________________
-____________________________________________________________
 Got it. I've added this task:
-  [T][ ] read book
+  [T][ ] read a book
 Now you have 1 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
-  [D][ ] return book (by: June 6th)
+  [D][ ] return book (by: Jun 06 2026, 6:00 PM)
 Now you have 2 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
-  [E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
+  [E][ ] project meeting (from: Aug 06 2026, 2:00 PM to: Aug 06 2026, 4:00 PM)
 Now you have 3 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 Here are the tasks in your list:
-1.[T][ ] read book
-2.[D][ ] return book (by: June 6th)
-3.[E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
+1.[T][ ] read a book
+2.[D][ ] return book (by: Jun 06 2026, 6:00 PM)
+3.[E][ ] project meeting (from: Aug 06 2026, 2:00 PM to: Aug 06 2026, 4:00 PM)
 ____________________________________________________________
 ____________________________________________________________
-Nice! I've marked this task as done:
-  [T][X] read book
+Omedeto! OP-kun!
+  [T][X] read a book
 ____________________________________________________________
 ____________________________________________________________
-Nice! I've marked this task as done:
-  [D][X] return book (by: June 6th)
-____________________________________________________________
-____________________________________________________________
-OK, I've marked this task as not done yet:
-  [T][ ] read book
-____________________________________________________________
-____________________________________________________________
-Here are the tasks in your list:
-1.[T][ ] read book
-2.[D][X] return book (by: June 6th)
-3.[E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
-____________________________________________________________
-____________________________________________________________
-Bye! See you again!
+Bye bye!
+Find for yourself why you came here. And...
+when you're finished... come back.
+Promise me.
+Have a good time.
 ____________________________________________________________
