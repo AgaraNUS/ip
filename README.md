@@ -1,6 +1,6 @@
 # Misato Katsuragi chatbot
 
-## To see the full capabilities of the chatbot, please refer to the [User Guide](https://pages.github.com/)
+## To see the full capabilities of the chatbot, please refer to the [User Guide](https://agaranus.github.io/Misato/)
 
 ### Pre-requisites
 Java Development Kit (JDK) 17 or higher installed on your machine.
