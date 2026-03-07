@@ -8,7 +8,7 @@ A lightweight, Command Line Interface (CLI) personal assistant and task manager,
 - Delete specific tasks from the list
 - Find tasks in list using keywords
 
-### To see the full capabilities of the chatbot, please refer to the [User Guide](https://agaranus.github.io/Misato/)
+### To see the full capabilities of the chatbot, please refer to the [User Guide](https://agaranus.github.io/ip/)
 
 ### Pre-requisites
 Java Development Kit (JDK) 17 or higher installed on your machine.
